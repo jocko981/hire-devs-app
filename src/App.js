@@ -11,7 +11,9 @@ function App() {
           {/* <Navbar /> */}
           <Routes>
             <Route path="/" element={<h1>Dashboard</h1>} />
-            <Route path="/create" element={<h1>create</h1>} />
+            <Route path="/create-developer" element={<h1>create profile</h1>} />
+            <Route path="/developers/:id" element={<h1>developers profile</h1>} />
+            <Route path="/hire-record" element={<h1>create profile</h1>} />
             <Route path="/records/:id" element={<h1>project</h1>} />
             <Route path="*" element={<h1>Error page</h1>} />
           </Routes>
