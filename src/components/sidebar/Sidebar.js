@@ -5,6 +5,7 @@ import "./Sidebar.css";
 import DashboardIcon from "../../assets/icons/dashboard_icon.svg";
 import UsersIcon from "../../assets/icons/users_icon.svg";
 import AddIcon from "../../assets/icons/add_icon.svg";
+import UserAddIcon from "../../assets/icons/user-add_icon.svg";
 
 export default function Sidebar() {
 
@@ -23,7 +24,6 @@ export default function Sidebar() {
                                 <span>Dashboard</span>
                             </NavLink>
                         </li>
-
                         <li>
                             <NavLink to="/developers">
                                 {/* exact property on NavLink if need */}
@@ -31,7 +31,15 @@ export default function Sidebar() {
                                 <span>Developers</span>
                             </NavLink>
                         </li>
-
+                    </ul>
+                    <hr />
+                    <ul>
+                        <li>
+                            <NavLink to="/add-developer">
+                                <img src={UserAddIcon} alt="add developer icon" />
+                                <span>Add developer</span>
+                            </NavLink>
+                        </li>
                         <li>
                             <NavLink to="/create">
                                 <img src={AddIcon} alt="add project icon" />
