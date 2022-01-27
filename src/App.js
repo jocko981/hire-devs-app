@@ -24,7 +24,7 @@ function App() {
             <Route path="/add-developer" element={<AddDeveloper />} />
             <Route path="/developers/edit/:id" element={<EditDeveloper />} />
             <Route path="/developers/:id" element={<DeveloperProfile />} />
-            <Route path="/add-hire-record" element={<h1>hire-record</h1>} />
+            <Route path="/new-hire-record" element={<h1>hire-record</h1>} />
             <Route path="/records/:id" element={<h1>record</h1>} />
             <Route path="*" element={<h1>Error page</h1>} />
           </Routes>

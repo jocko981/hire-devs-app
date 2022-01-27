@@ -1,4 +1,4 @@
 
 export default function Developers() {
-    return <div>Developers</div>;
+    return <h2 className="page-title">Developers</h2>;
 }

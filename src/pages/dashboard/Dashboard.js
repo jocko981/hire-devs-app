@@ -1,10 +1,15 @@
-
+// hooks
+import { useCollection } from "../../hooks/useCollection";
 
 export default function Dashboard() {
+    const { documents, error } = useCollection("records")
+
     return (
         <div>
-            <div>Dashboard</div>
-            <p>here we display RECORDS</p>
+            <h2 className="page-title">Dashboard</h2>
+            {error && <p className="error">{error}</p>}
+            <p>All hire Records</p>
+            {/* {documents && <RecordsList records={documents} />} */}
         </div>
     )
 }

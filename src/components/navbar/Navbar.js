@@ -1,6 +1,6 @@
 // styles
 import "./Navbar.css";
-
+// assets
 import ClipboardIcon from "../../assets/icons/clipboard_icon.svg";
 
 export default function Navbar() {
@@ -12,7 +12,8 @@ export default function Navbar() {
                     <span>Hire devs App</span>
                 </li>
 
-                <li><button className="btn">maybe darkmode here</button>
+                <li>
+                    <button className="btn">maybe darkmode here</button>
                 </li>
             </ul>
         </div>
