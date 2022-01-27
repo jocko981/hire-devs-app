@@ -1,5 +1,10 @@
-import React from "react";
+
 
 export default function Dashboard() {
-    return <div>Dashboard</div>;
+    return (
+        <div>
+            <div>Dashboard</div>
+            <p>here we display RECORDS</p>
+        </div>
+    )
 }
