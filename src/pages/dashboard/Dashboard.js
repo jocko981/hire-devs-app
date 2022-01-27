@@ -9,7 +9,7 @@ export default function Dashboard() {
             <h2 className="page-title">Dashboard</h2>
             {error && <p className="error">{error}</p>}
             <p>All hire Records</p>
-            {/* {documents && <RecordsList records={documents} />} */}
+            {documents && console.log(documents)}
         </div>
     )
 }

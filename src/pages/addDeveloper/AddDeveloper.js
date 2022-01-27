@@ -1,109 +1,102 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 // styles
 import "./AddDeveloper.css";
+// consts
+import { NATIVE_LANGUAGES, DEVELOPERS_TECHNOLOGIES } from "../../constants";
 // hooks
-import { useCollection } from "../../hooks/useCollection";
-import { useFirestore } from "../../hooks/useFirestore";
-// firebase
-import { timestamp } from "../../firebase/config";
+import { useSignup } from "../../hooks/useSignup";
 
-const categories = [
-    { value: "development", label: "Development" },
-    { value: "design", label: "Design" },
-    { value: "sales", label: "Sales" },
-    { value: "marketing", label: "Marketing" }
-]
-const devs = [
-    { value: "Morko", label: "Frontend" },
-    { value: "Dorko", label: "BE" },
-    { value: "Zorko", label: "QA" },
-    { value: "Pavle", label: "PM" }
-]
-
-export default function CreateDeveloper() {
-    const navigate = useNavigate()
-    const { addDocument, response } = useFirestore("developers")
-    const { documents } = useCollection("developers")
-    const [developers, setDevelopers] = useState([])
+export default function AddDeveloper() {
+    const { signupDeveloper, isPending, error } = useSignup()
     // form fields
     const [name, setName] = useState("")
-    const [details, setDetails] = useState("")
-    const [dueDate, setDueDate] = useState("")
-    const [category, setCategory] = useState("")
-    const [assignedUsers, setAssignedUsers] = useState([])
+    const [email, setEmail] = useState("")
+    const [phoneNumber, setPhoneNumber] = useState("")
+    const [location, setLocation] = useState("")
+    const [profilePicture, setProfilePicture] = useState(null)
+    const [pricePerHour, setPricePerHour] = useState("")
+    const [technology, setTechnology] = useState("")
+    const [description, setDescription] = useState("")
+    const [yearsOfExperience, setYearsOfExperience] = useState("")
+    const [nativeLanguage, setNativeLanguage] = useState("")
+    const [linkedinProfile, setLinkedinProfile] = useState("")
+    // form errors
+    const [profilePictureError, setProfilePictureError] = useState("")
     const [formError, setFormError] = useState(null)
     const [formCaughtErrorOnce, setFormCaughtErrorOnce] = useState(false)
 
     useEffect(() => {
-        if (documents) {
-            const options = documents.map(user => {
-                return { value: user, label: user.displayName }
-            })
-            setDevelopers(options)
-        }
-    }, [documents])
-
-    useEffect(() => {
         if (formCaughtErrorOnce) {
-            if (category && assignedUsers.length) {
+            if (technology && nativeLanguage) {
                 setFormError(null)
                 return
             }
         }
-    }, [formCaughtErrorOnce, category, assignedUsers.length])
+    }, [formCaughtErrorOnce, technology, nativeLanguage])
+
+    const handleFileChange = (e) => {
+        setProfilePicture(null)
+        let selectedFile = e.target.files[0]
+
+        if (!selectedFile) {
+            setProfilePictureError("Please select your Profile Picture c:")
+            return
+        }
+        if (!selectedFile.type.includes("image")) {
+            setProfilePictureError("File must be an image :D")
+            return
+        }
+        if (selectedFile.size > 500000) {
+            setProfilePictureError("Hey, sorry, image must be less than 0.5MB")
+            return
+        }
+
+        setProfilePictureError("")
+        setProfilePicture(selectedFile)
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         setFormError(null)
 
-        if (!category && !assignedUsers.length) {
+        if (!nativeLanguage) {
             setFormCaughtErrorOnce(true)
-            setFormError("Please select your project Category and Assign at least 1 user")
+            setFormError("Please select developers Native language")
             return
         }
-        if (!category) {
+        if (!technology) {
             setFormCaughtErrorOnce(true)
-            setFormError("Please select your project Category")
-            return
-        }
-        if (!assignedUsers.length) {
-            setFormCaughtErrorOnce(true)
-            setFormError("Please Assign at least 1 user to the project")
+            setFormError("Please select Technology that the developer is using")
             return
         }
 
-        const assignedUsersList = assignedUsers.map((u) => {
-            return {
-                user: u
-            }
-        })
-
-        const project = {
+        const developer = {
             name,
-            details,
-            category: category.value,
-            dueDate: timestamp.fromDate(new Date(dueDate)),
-            // assignedUsers:
-            comments: [],
-            assignedUsersList: assignedUsersList
+            email,
+            phoneNumber,
+            location,
+            profilePicture,
+            pricePerHour,
+            technology,
+            description,
+            yearsOfExperience,
+            nativeLanguage,
+            linkedinProfile,
+            hiredDueDate: null
         }
 
-        await addDocument(project)
-        if (!response.error) {
-            navigate("/")
-        }
+        await signupDeveloper(name, email, phoneNumber, location, profilePicture, pricePerHour, technology, description, yearsOfExperience, nativeLanguage, linkedinProfile)
 
-        console.log(name, details, dueDate, category.value, assignedUsers)
+        // console.log(name, description)
     }
 
     return (
         <div className="create-form">
-            <h2 className="page-title">Create project</h2>
+            <h2 className="page-title">Add new Developer</h2>
             <form onSubmit={handleSubmit}>
                 <label>
-                    <span>Name of a Project:</span>
+                    <span>Name:</span>
                     <input
                         required
                         type="text"
@@ -112,39 +105,89 @@ export default function CreateDeveloper() {
                     />
                 </label>
                 <label>
-                    <span>Project details:</span>
-                    <textarea
+                    <span>Email:</span>
+                    <input
+                        required
+                        type="email"
+                        onChange={(e) => setEmail(e.target.value)}
+                        value={email}
+                    />
+                </label>
+                <label>
+                    <span>Phone Number:</span>
+                    <input
+                        required
+                        type="number"
+                        onChange={(e) => setPhoneNumber(e.target.value)}
+                        value={phoneNumber}
+                    />
+                </label>
+                <label>
+                    <span>Location:</span>
+                    <input
                         required
                         type="text"
-                        onChange={(e) => setDetails(e.target.value)}
-                        value={details}
+                        onChange={(e) => setLocation(e.target.value)}
+                        value={location}
+                    />
+                </label>
+                <label>
+                    <span>(optional) Profile picture:</span>
+                    <input
+                        type="file"
+                        onChange={handleFileChange}
+                    />
+                </label>
+                <label>
+                    <span>Price per Hour:</span>
+                    <input
+                        required
+                        type="number"
+                        onChange={(e) => setPricePerHour(e.target.value)}
+                        value={pricePerHour}
+                    />
+                </label>
+                <label>
+                    <span>Technology:</span>
+                    <Select
+                        options={DEVELOPERS_TECHNOLOGIES}
+                        onChange={(option) => setTechnology(option.value)}
+                    />
+                </label>
+                <label>
+                    <span>(optional) Description:</span>
+                    <textarea
+                        type="text"
+                        onChange={(e) => setDescription(e.target.value)}
+                        value={description}
                     ></textarea>
                 </label>
                 <label>
-                    <span>Due date:</span>
+                    <span>Years of experience:</span>
                     <input
                         required
-                        type="date"
-                        onChange={(e) => setDueDate(e.target.value)}
-                        value={dueDate}
+                        type="number"
+                        onChange={(e) => setYearsOfExperience(e.target.value)}
+                        value={yearsOfExperience}
+                    />
+                </label>
+                <label>
+                    <span>Native language:</span>
+                    <Select
+                        options={NATIVE_LANGUAGES}
+                        onChange={(option) => setNativeLanguage(option.value)}
+                    />
+                </label>
+                <label>
+                    <span>(optional) Linkedin profile Link:</span>
+                    <input
+                        type="text"
+                        onChange={(e) => setLinkedinProfile(e.target.value)}
+                        value={linkedinProfile}
                     />
                 </label>
 
-                <label>
-                    <span>Project category:</span>
-                    <Select
-                        options={categories}
-                        onChange={(option) => setCategory(option)}
-                    />
-                </label>
-                <label>
-                    <span>Assign project to:</span>
-                    <Select
-                        options={devs}
-                        onChange={(option) => setAssignedUsers(option)}
-                        isMulti
-                    />
-                </label>
+                {profilePictureError && <div className="error">{profilePictureError}</div>}
                 {formError && <div className="error">{formError}</div>}
                 <button className="btn">Add project</button>
             </form>

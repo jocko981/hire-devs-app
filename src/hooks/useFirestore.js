@@ -65,6 +65,9 @@ export const useFirestore = (collection) => {
         }
     }
 
+    // edit a document
+    // TO DO
+
     useEffect(() => {
         return () => setIsCancelled(true)
     }, [])
