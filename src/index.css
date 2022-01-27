@@ -68,6 +68,10 @@ code {
 }
 
 /* forms */
+.create-form {
+  max-width: 540px;
+}
+
 label {
   display: block;
   margin: 24px auto;

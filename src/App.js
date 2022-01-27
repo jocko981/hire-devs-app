@@ -9,6 +9,7 @@ import EditDeveloper from "./pages/editDeveloper/EditDeveloper";
 import Developers from "./pages/developers/Developers";
 // components
 import Sidebar from "./components/sidebar/Sidebar";
+import Navbar from "./components/navbar/Navbar";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
       <BrowserRouter>
         <Sidebar />
         <div className="container">
-          {/* <Navbar /> */}
+          <Navbar />
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/developers" element={<Developers />} />

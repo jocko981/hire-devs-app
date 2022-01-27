@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-
 // styles
 import "./Sidebar.css";
 // assets
@@ -13,7 +12,7 @@ export default function Sidebar() {
         <div className="sidebar">
             <div className="sidebar-content">
                 <div className="user">
-                    Hire devs App
+                    Welcome!
                 </div>
                 <nav className="links">
                     <ul>
