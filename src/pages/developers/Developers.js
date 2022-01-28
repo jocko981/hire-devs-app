@@ -12,21 +12,21 @@ export default function Developers() {
     const { documents, error } = useCollection("developers")
     const [selected, setSelected] = useState(3)
     const [developers, setDevelopers] = useState(documents)
-    const today = timestamp.fromDate(new Date())
+    const todayTimestamp = timestamp.fromDate(new Date())
 
     useEffect(() => {
         setDevelopers(documents)
     }, [documents])
 
     const filterAvailable = useCallback(() => {
-        setDevelopers(documents.filter(dev => today > dev.hiredDueDate))
+        setDevelopers(documents.filter(dev => todayTimestamp > dev.hiredDueDate))
         setSelected(1)
-    }, [documents, today])
+    }, [documents, todayTimestamp])
 
     const filterHired = useCallback(() => {
-        setDevelopers(documents.filter(dev => today <= dev.hiredDueDate))
+        setDevelopers(documents.filter(dev => todayTimestamp <= dev.hiredDueDate))
         setSelected(2)
-    }, [documents, today])
+    }, [documents, todayTimestamp])
 
     const filterAll = useCallback(() => {
         setDevelopers(documents)

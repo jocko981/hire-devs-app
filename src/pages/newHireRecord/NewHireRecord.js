@@ -16,6 +16,7 @@ import { timestamp } from "../../firebase/config";
 
 
 export default function NewHireRecord() {
+    const todayTimestamp = timestamp.fromDate(new Date())
     const today = new Date()
     const tomorrow = new Date().setDate(today.getDate() + 1)
 
@@ -37,12 +38,12 @@ export default function NewHireRecord() {
 
     useEffect(() => {
         if (documents) {
-            const options = documents.map(developer => {
+            const options = documents.filter(developer => todayTimestamp > developer.hiredDueDate).map(developer => {
                 return { value: developer, label: developer.name }
             })
             setDevelopers(options)
         }
-    }, [documents])
+    }, [documents, todayTimestamp])
 
     useEffect(() => {
         if (formCaughtErrorOnce) {
