@@ -13,7 +13,7 @@ export default function Navbar() {
                 </li>
 
                 <li>
-                    <button className="btn">maybe darkmode here</button>
+                    {/* <span>Dark Mode</span> */}
                 </li>
             </ul>
         </div>
