@@ -6,7 +6,6 @@ import { useDocument } from "../../hooks/useDocument";
 export default function DeveloperProfile() {
     const { id } = useParams()
     const { document, error } = useDocument("developers", id)
-    console.log(document);
 
     if (error) {
         return <div className="error">{error}</div>

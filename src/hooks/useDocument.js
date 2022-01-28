@@ -18,8 +18,8 @@ export const useDocument = (collection, id) => {
                 setError("Such document does't exist")
             }
         }, (err) => {
-            console.log("Get doc err", err)
             setError("Failed to get the document")
+            throw new Error(err)
         })
 
         return () => unsub()
