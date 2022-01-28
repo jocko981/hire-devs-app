@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 // hooks
 import { useDocument } from "../../hooks/useDocument";
-import EditForm from "./EditForm";
+import EditForm from "./editForm/EditForm";
 
 export default function EditDeveloper() {
     const { id } = useParams()

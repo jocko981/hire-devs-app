@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 // consts
-import { NATIVE_LANGUAGES, DEVELOPERS_TECHNOLOGIES } from "../../constants";
+import { NATIVE_LANGUAGES, DEVELOPERS_TECHNOLOGIES } from "../../../constants";
 // hooks
-import { useFirestore } from "../../hooks/useFirestore";
+import { useFirestore } from "../../../hooks/useFirestore";
 
 export default function EditForm({ developer, id }) {
     const navigate = useNavigate()

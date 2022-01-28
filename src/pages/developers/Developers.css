@@ -1,0 +1,14 @@
+.developers .filters {
+  padding: 10px 0;
+}
+
+.developers .filters li {
+  display: inline-block;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.developers .filtered {
+  color: var(--highlight-colo);
+  text-decoration: underline;
+}

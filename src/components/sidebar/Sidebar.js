@@ -42,7 +42,7 @@ export default function Sidebar() {
                         </li>
                         <li>
                             <NavLink to="/new-hire-record">
-                                <img src={AddIcon} alt="add project icon" />
+                                <img src={AddIcon} alt="add record icon" />
                                 <span>New hire record</span>
                             </NavLink>
                         </li>

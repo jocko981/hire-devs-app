@@ -9,15 +9,11 @@ import { useFirestore } from "../../hooks/useFirestore";
 import Avatar from "../avatar/Avatar";
 import DeleteModal from "../modals/deleteModal/DeleteModal";
 
-export default function ProjectList({ developers }) {
+export default function DevelopersList({ developers }) {
     const { deleteDocument, response, isPending } = useFirestore("developers")
     const [isOpen, setIsOpen] = useState(false)
     const [selectedId, setSelectedId] = useState(null)
-
     const today = timestamp.fromDate(new Date())
-
-    console.log(developers);
-    console.log(developers.map(item => today > item.hiredDueDate));
 
     const handleDeleteClick = (id) => {
         setIsOpen(true);
