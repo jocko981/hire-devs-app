@@ -1,0 +1,45 @@
+.developers-list {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 10px;
+}
+
+.developers-list .developer {
+  padding: 8px;
+  border-radius: 6px;
+  background-color: #fff;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.05);
+  color: inherit;
+}
+
+.developers-list a {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--heading-color);
+}
+
+.developers-list .developer .avatar {
+  width: 30px;
+  height: 30px;
+}
+
+.developers-list .developer h4 {
+  font-size: 0.9em;
+  color: var(--heading-color);
+}
+
+/* .developers-list p {
+  color: var(--text-color);
+  font-size: 0.9em;
+} */
+
+.developers-list ul {
+  display: flex;
+  justify-content: space-between;
+}
+
+.developers-list li {
+  margin-right: 10px;
+}

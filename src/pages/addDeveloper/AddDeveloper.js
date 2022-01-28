@@ -72,7 +72,7 @@ export default function AddDeveloper() {
     }
 
     return (
-        <div className="create-form">
+        <div className="add-developer">
             <h2 className="page-title">Add new Developer</h2>
             <form onSubmit={handleSubmit}>
                 <label>
