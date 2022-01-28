@@ -11,7 +11,7 @@ export default function RecordsList({ records }) {
                 ? <p>No records for now!</p>
                 : records.map(record => (
                     <div className="records" key={record.id}>
-                        <h4>{record.name}</h4>
+                        <h4>{record.title}</h4>
                         <p>Due by: {record.endDate.toDate().toDateString()}</p>
                         <div className="assigned-to">
                             <ul>

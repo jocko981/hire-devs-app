@@ -22,6 +22,21 @@
   border-bottom: 1px solid var(--heading-color);
 }
 
+.developers-list .developer .info .available {
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+  background: #0ebb50;
+  border-radius: 50%;
+}
+.developers-list .developer .info .hired {
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+  background: #fa6a3f;
+  border-radius: 50%;
+}
+
 .developers-list .developer .info .avatar {
   width: 30px;
   height: 30px;

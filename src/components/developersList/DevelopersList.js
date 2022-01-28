@@ -1,17 +1,23 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+// styles
+import "./DevelopersList.css";
 // firestore
+import { timestamp } from "../../firebase/config";
 import { useFirestore } from "../../hooks/useFirestore";
 // components
 import Avatar from "../avatar/Avatar";
 import DeleteModal from "../modals/deleteModal/DeleteModal";
-// styles
-import "./DevelopersList.css";
 
 export default function ProjectList({ developers }) {
     const { deleteDocument, response, isPending } = useFirestore("developers")
     const [isOpen, setIsOpen] = useState(false)
     const [selectedId, setSelectedId] = useState(null)
+
+    const today = timestamp.fromDate(new Date())
+
+    console.log(developers);
+    console.log(developers.map(item => today > item.hiredDueDate));
 
     const handleDeleteClick = (id) => {
         setIsOpen(true);
@@ -43,6 +49,7 @@ export default function ProjectList({ developers }) {
                     <div className="developer" key={developer.id}>
                         <div className="info">
                             <Link to={`/developers/${developer.id}`}>
+                                <span className={today > developer.hiredDueDate ? "available" : "hired"}></span>
                                 <Avatar src={developer.profilePictureURL} />
                                 <h4>{developer.name}</h4>
                             </Link>
