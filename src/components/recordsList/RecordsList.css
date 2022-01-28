@@ -5,7 +5,7 @@
   grid-gap: 20px;
 }
 
-.records-list .records {
+.records-list .record {
   background-color: #fff;
   padding: 16px;
   border-radius: 6px;
@@ -13,7 +13,12 @@
   color: inherit;
 }
 
-.records-list h4 {
+.records-list .record .record-info {
+  padding-top: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.records-list .record-info h4 {
   font-size: 0.9em;
   color: var(--heading-color);
 }
@@ -21,12 +26,6 @@
 .records-list p {
   color: var(--text-color);
   font-size: 0.9em;
-}
-
-.records-list .assigned-to {
-  margin-top: 20px;
-  padding-top: 10px;
-  border-top: 1px solid #eee;
 }
 
 .records-list .assigned-to ul {

@@ -10,9 +10,11 @@ export default function RecordsList({ records }) {
             {records.length < 1
                 ? <p>No records for now!</p>
                 : records.map(record => (
-                    <div className="records" key={record.id}>
-                        <h4>{record.title}</h4>
-                        <p>Due by: {record.endDate.toDate().toDateString()}</p>
+                    <div className="record" key={record.id}>
+                        <div className="record-info">
+                            <h4>{record.title}</h4>
+                            <p>Due by: {record.endDate.toDate().toDateString()}</p>
+                        </div>
                         <div className="assigned-to">
                             <ul>
                                 {record.assignedDevelopersList.map(developer => (
