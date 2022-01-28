@@ -1,20 +1,22 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 // styles
 import "./AddDeveloper.css";
 // consts
 import { NATIVE_LANGUAGES, DEVELOPERS_TECHNOLOGIES } from "../../constants";
 // hooks
-import { useSignup } from "../../hooks/useSignup";
+import { useFirestore } from "../../hooks/useFirestore";
 
 export default function AddDeveloper() {
-    const { signupDeveloper, isPending, error } = useSignup()
+    const navigate = useNavigate()
+    const { addDocument, response } = useFirestore("developers")
     // form fields
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
     const [location, setLocation] = useState("")
-    const [profilePicture, setProfilePicture] = useState(null)
+    const [profilePictureURL, setProfilePictureURL] = useState("")
     const [pricePerHour, setPricePerHour] = useState("")
     const [technology, setTechnology] = useState("")
     const [description, setDescription] = useState("")
@@ -22,7 +24,6 @@ export default function AddDeveloper() {
     const [nativeLanguage, setNativeLanguage] = useState("")
     const [linkedinProfile, setLinkedinProfile] = useState("")
     // form errors
-    const [profilePictureError, setProfilePictureError] = useState("")
     const [formError, setFormError] = useState(null)
     const [formCaughtErrorOnce, setFormCaughtErrorOnce] = useState(false)
 
@@ -34,27 +35,6 @@ export default function AddDeveloper() {
             }
         }
     }, [formCaughtErrorOnce, technology, nativeLanguage])
-
-    const handleFileChange = (e) => {
-        setProfilePicture(null)
-        let selectedFile = e.target.files[0]
-
-        if (!selectedFile) {
-            setProfilePictureError("Please select your Profile Picture c:")
-            return
-        }
-        if (!selectedFile.type.includes("image")) {
-            setProfilePictureError("File must be an image :D")
-            return
-        }
-        if (selectedFile.size > 500000) {
-            setProfilePictureError("Hey, sorry, image must be less than 0.5MB")
-            return
-        }
-
-        setProfilePictureError("")
-        setProfilePicture(selectedFile)
-    }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -76,19 +56,19 @@ export default function AddDeveloper() {
             email,
             phoneNumber,
             location,
-            profilePicture,
+            profilePictureURL,
             pricePerHour,
             technology,
             description,
             yearsOfExperience,
             nativeLanguage,
             linkedinProfile,
-            hiredDueDate: null
+            hiredDueDate: ""
         }
-
-        await signupDeveloper(name, email, phoneNumber, location, profilePicture, pricePerHour, technology, description, yearsOfExperience, nativeLanguage, linkedinProfile)
-
-        // console.log(name, description)
+        await addDocument(developer)
+        if (!response.error) {
+            navigate("/developers")
+        }
     }
 
     return (
@@ -132,10 +112,11 @@ export default function AddDeveloper() {
                     />
                 </label>
                 <label>
-                    <span>(optional) Profile picture:</span>
+                    <span>(optional) Profile picture URL:</span>
                     <input
-                        type="file"
-                        onChange={handleFileChange}
+                        type="test"
+                        onChange={(e) => setProfilePictureURL(e.target.value)}
+                        value={profilePictureURL}
                     />
                 </label>
                 <label>
@@ -187,9 +168,11 @@ export default function AddDeveloper() {
                     />
                 </label>
 
-                {profilePictureError && <div className="error">{profilePictureError}</div>}
                 {formError && <div className="error">{formError}</div>}
-                <button className="btn">Add project</button>
+                {!response.isPending
+                    ? <button className="btn">Add Developer</button>
+                    : <button className="btn" disabled>Pending...</button>
+                }
             </form>
         </div>
     )
