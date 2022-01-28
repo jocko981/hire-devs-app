@@ -19,20 +19,22 @@
   display: flex;
   align-items: center;
   margin: 0 auto;
+  background: aliceblue;
+  border-radius: 6px;
   border-bottom: 1px solid var(--heading-color);
 }
 
 .developers-list .developer .info .available {
   width: 15px;
   height: 15px;
-  margin-right: 10px;
+  margin: 0 5px;
   background: #0ebb50;
   border-radius: 50%;
 }
 .developers-list .developer .info .hired {
   width: 15px;
   height: 15px;
-  margin-right: 10px;
+  margin: 0 5px;
   background: #fa6a3f;
   border-radius: 50%;
 }
