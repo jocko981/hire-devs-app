@@ -7,7 +7,7 @@ import Avatar from "../avatar/Avatar";
 import "./DevelopersList.css";
 
 export default function ProjectList({ developers }) {
-    console.log(developers);
+    console.log("developers", developers);
     return (
         <div className="developers-list">
             {developers.length < 1

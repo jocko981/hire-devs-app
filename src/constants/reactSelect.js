@@ -12,3 +12,13 @@ export const DEVELOPERS_TECHNOLOGIES = [
     { value: "Python", label: "Python" },
     { value: "PHP", label: "PHP" }
 ]
+
+
+export const RECORD_CATEGORIES = [
+    { value: "DEVELOPMENT", label: "DEVELOPMENT" },
+    { value: "DESIGN", label: "DESIGN" },
+    { value: "SALES", label: "SALES" },
+    { value: "MARKETING", label: "MARKETING" },
+    { value: "RANDOM EVENT", label: "RANDOM EVENT" },
+    { value: "LEAVE", label: "LEAVE" }
+]
