@@ -43,7 +43,7 @@ export default function NewHireRecord() {
             })
             setDevelopers(options)
         }
-    }, [documents, todayTimestamp])
+    }, [documents])
 
     useEffect(() => {
         if (formCaughtErrorOnce) {
